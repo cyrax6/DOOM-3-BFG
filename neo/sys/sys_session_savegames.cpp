@@ -288,8 +288,9 @@ void idSessionLocal::OnSaveCompleted( idSaveLoadParms * parms ) {
 		GetSaveGameManager().ClearRetryInfo();
 	}
 
+	// Cyrax: Had to make this change. The game would not go beyond the "Saving" display screen when loading a map from command line (+devmap)
 	// Only turn off the indicator if we're not also going to save the profile settings
-	if ( master != NULL && master->GetProfile() != NULL && !master->GetProfile()->IsDirty() ) {
+	if ( (master != NULL) && (master->GetProfile() == NULL) || (!master->GetProfile()->IsDirty()) ) {
 		common->Dialog().ShowSaveIndicator( false );
 	}
 
